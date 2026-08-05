@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=6">
-  <script src="./recipes.js?v=6" defer></script>
-  <script src="./app.js?v=6" defer></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/recipes.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
 </head>
 <body>
   <div id="confetti-layer" class="confetti-layer" aria-hidden="true"></div>
@@ -47,9 +47,16 @@
           <div class="hero-mascot">
             <div class="mascot-stage">
               <div class="sparkle sparkle-one">✦</div><div class="sparkle sparkle-two">✦</div><div class="sparkle sparkle-three">♥</div>
-              <figure class="berrybelle-photo-wrap">
-                <img class="berrybelle-photo" src="./BerryBelle.jpg?v=6" alt="BerryBelle, the pink strawberry milk carton mascot for Berry Vibes Studio">
-              </figure>
+              <div class="berrybelle" aria-label="BerryBelle, the strawberry milk carton mascot">
+                <div class="carton-top"><div class="cap"></div></div>
+                <div class="carton-body">
+                  <div class="face"><span class="eye"></span><span class="eye"></span><span class="smile"></span></div>
+                  <div class="cheeks"><span></span><span></span></div>
+                  <div class="strawberry-emblem">🍓</div>
+                  <div class="arm arm-left"></div><div class="arm arm-right"></div>
+                  <div class="leg leg-left"></div><div class="leg leg-right"></div>
+                </div>
+              </div>
               <div class="speech-bubble">Pick a craving and let’s go! ✨</div>
             </div>
           </div>
