@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="berry">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ed5f89">
+  <meta name="description" content="Berry Vibes Studio — a playful gamified Cozy Core Diet live cookbook with recipe paths, food battles, and profile customization.">
+  <title>Berry Vibes Studio — Live CCD Cookbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css?v=6">
+  <script src="./recipes.js?v=6" defer></script>
+  <script src="./app.js?v=6" defer></script>
+</head>
+<body>
+  <div id="confetti-layer" class="confetti-layer" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <button class="brand-button" type="button" data-view-target="home" aria-label="Berry Vibes Studio home">
+      <span class="brand-mark">🍓</span><span class="brand-name">Berry Vibes</span>
+    </button>
+    <div class="top-stats" aria-label="Player stats">
+      <button class="stat-pill" type="button" data-stat="streak" title="Daily streak">🔥 <strong id="top-streak">1</strong></button>
+      <button class="stat-pill" type="button" data-stat="xp" title="Berry XP">✨ <strong id="top-xp">0</strong></button>
+      <button class="stat-pill" type="button" data-stat="hearts" title="Hearts">💗 <strong id="top-hearts">5</strong></button>
+    </div>
+    <button class="profile-shortcut" type="button" data-view-target="profile" aria-label="Open profile customization">
+      <span id="header-avatar" class="mini-avatar">🍓</span><span id="header-profile-name">Profile</span>
+    </button>
+  </header>
+
+  <main class="main-content">
+    <!-- HOME -->
+    <section class="view active-view" id="view-home" data-view="home">
+      <div class="home-grid">
+        <section class="hero-card">
+          <div class="hero-copy">
+            <span class="eyebrow">🍓 YOUR LIVE COZY COOKBOOK</span>
+            <h1>Cook. Compare. Collect cozy wins.</h1>
+            <p class="hero-text">Explore CCD recipes like a game: follow a giant recipe path, earn Berry XP, save favorites, enter food battles, and customize the entire cookbook world.</p>
+            <div class="hero-actions">
+              <button class="big-button primary-button" type="button" data-view-target="path">START THE PATH <span>→</span></button>
+              <button class="big-button secondary-button" type="button" data-view-target="battle">QUICK BATTLE <span>⚔️</span></button>
+            </div>
+          </div>
+          <div class="hero-mascot">
+            <div class="mascot-stage">
+              <div class="sparkle sparkle-one">✦</div><div class="sparkle sparkle-two">✦</div><div class="sparkle sparkle-three">♥</div>
+              <figure class="berrybelle-photo-wrap">
+                <img class="berrybelle-photo" src="./BerryBelle.jpg?v=6" alt="BerryBelle, the pink strawberry milk carton mascot for Berry Vibes Studio">
+              </figure>
+              <div class="speech-bubble">Pick a craving and let’s go! ✨</div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="daily-card">
+          <div class="daily-heading"><div><span class="eyebrow">TODAY'S GOAL</span><h2>Berry Boost</h2></div><span class="goal-icon">🎯</span></div>
+          <div class="goal-progress">
+            <div class="progress-ring"><span id="daily-percent">0%</span></div>
+            <div><strong><span id="daily-xp">0</span> / 100 XP</strong><p>Cook, save, or battle recipes to fill today’s ring.</p></div>
+          </div>
+          <button class="small-button" type="button" data-view-target="path">KEEP GOING</button>
+        </aside>
+      </div>
+
+      <section class="section-block">
+        <div class="section-title-row"><div><span class="eyebrow">YOUR WORLDS</span><h2>Pick your craving</h2></div><button class="text-button" type="button" data-view-target="recipes">See all recipes →</button></div>
+        <div class="world-grid">
+          <button class="world-card pink-world" type="button" data-world="Sweet Breakfast Bakes"><span class="world-icon">🥞</span><span><strong>Sweet Breakfast</strong><small>Pancakes, rolls & cozy starts</small></span><span class="world-arrow">›</span></button>
+          <button class="world-card cocoa-world" type="button" data-world="Cookies and Bars"><span class="world-icon">🍫</span><span><strong>Chocolate Comfort</strong><small>Brownies, cookies & cocoa magic</small></span><span class="world-arrow">›</span></button>
+          <button class="world-card green-world" type="button" data-world="Coffee and Sweet Drinks"><span class="world-icon">☕</span><span><strong>Coffee-Shop Vibes</strong><small>Lattes, mochas & cozy sips</small></span><span class="world-arrow">›</span></button>
+          <button class="world-card orange-world" type="button" data-world="Wraps, Burritos, and Quesadillas"><span class="world-icon">🌯</span><span><strong>Savory & Cozy</strong><small>Wraps, pizza & comfort meals</small></span><span class="world-arrow">›</span></button>
+        </div>
+      </section>
+
+      <section class="section-block editorial-block">
+        <div class="section-title-row"><div><span class="eyebrow">↕ LIVE COOKBOOK MODE</span><h2>Flip the recipe packet</h2><p>Inspired by experimental product pages: scroll over the stage or use the arrows to rotate through your cookbook.</p></div><div class="editorial-buttons"><button id="packet-prev" type="button" aria-label="Previous recipe">↑</button><button id="packet-next" type="button" aria-label="Next recipe">↓</button></div></div>
+        <div id="packet-stage" class="packet-stage" tabindex="0" aria-label="Interactive scrolling recipe spotlight">
+          <div class="packet-photo packet-left"><span id="packet-left-emoji">🥞</span></div>
+          <button id="recipe-packet" class="recipe-packet" type="button" aria-label="Open spotlight recipe">
+            <span class="packet-small">BERRY VIBES</span><span id="packet-emoji" class="packet-emoji">🍓</span><strong id="packet-name">Recipe</strong><small id="packet-category">Category</small><span class="packet-open">OPEN RECIPE</span>
+          </button>
+          <div class="packet-photo packet-right"><span id="packet-right-emoji">🍫</span></div>
+          <span class="scroll-up">SCROLL UP ↑</span><span class="scroll-down">SCROLL DOWN ↓</span>
+        </div>
+      </section>
+
+      <section class="section-block home-summary">
+        <div class="section-title-row"><div><span class="eyebrow">YOUR STORY</span><h2>Small wins stack up</h2></div></div>
+        <div class="summary-grid">
+          <article><span>✅</span><strong id="summary-cooked">0</strong><small>recipes cooked</small></article>
+          <article><span>💖</span><strong id="summary-saved">0</strong><small>favorites saved</small></article>
+          <article><span>📚</span><strong id="summary-total">0</strong><small>recipes in the live cookbook</small></article>
+        </div>
+      </section>
+    </section>
+
+    <!-- LONG PATH -->
+    <section class="view" id="view-path" data-view="path">
+      <section class="path-header-card">
+        <div><span class="eyebrow">🗺️ EXTRA-LONG RECIPE JOURNEY</span><h1>The CCD Recipe Path</h1><p>Every node is a real recipe from the cookbook collection. Open a node, explore it, and mark it cooked to turn the path green.</p></div>
+        <div class="world-progress"><span id="path-complete-text">0 / 0 complete</span><div class="mini-progress"><div id="path-progress-bar"></div></div></div>
+      </section>
+      <div id="path-container" class="dynamic-path"></div>
+    </section>
+
+    <!-- BATTLE -->
+    <section class="view" id="view-battle" data-view="battle">
+      <section class="battle-header">
+        <div><span class="eyebrow">⚔️ CCD BATTLE ARENA</span><h1>Same craving. Different vibe.</h1><p>Choose the version that fits your mood. CCD picks earn a bigger game bonus, but the interface never labels food as “good” or “bad.”</p></div>
+        <button id="random-battle" class="small-button" type="button">RANDOM BATTLE</button>
+      </section>
+      <section class="battle-card">
+        <div class="battle-question"><span class="question-chip" id="battle-category">RECIPE BATTLE</span><h2 id="battle-question">Which vibe are you choosing today?</h2></div>
+        <div class="battle-grid">
+          <button class="choice-card" type="button" data-choice="ccd"><span class="choice-badge">CCD</span><div class="food-visual" id="ccd-food">🍩</div><h3 id="ccd-name">CCD Recipe</h3><p id="ccd-description">Cozy recipe description.</p><div class="trait-row" id="ccd-traits"></div></button>
+          <div class="vs-badge">VS</div>
+          <button class="choice-card" type="button" data-choice="classic"><span class="choice-badge classic-badge">CLASSIC</span><div class="food-visual" id="classic-food">🥐</div><h3 id="classic-name">Classic Version</h3><p id="classic-description">Familiar restaurant or bakery energy.</p><div class="trait-row"><span>familiar</span><span>classic</span><span>craving</span></div></button>
+        </div>
+        <div class="battle-feedback" id="battle-feedback" aria-live="polite"><div class="feedback-icon">🍓</div><div><strong>Pick your cozy winner!</strong><p>Both choices are allowed. You’re choosing a vibe, not passing a morality test.</p></div></div>
+        <button class="big-button primary-button next-battle-button" id="next-battle" type="button" hidden>NEXT BATTLE →</button>
+      </section>
+    </section>
+
+    <!-- RECIPES -->
+    <section class="view" id="view-recipes" data-view="recipes">
+      <section class="recipes-heading">
+        <div><span class="eyebrow">🍓 FULL LIVE COOKBOOK</span><h1>Every CCD recipe in one shelf</h1><p>Search, filter, save favorites, open recipe previews, and send any recipe into a battle.</p></div>
+        <div class="saved-counter"><span>💗</span><strong id="saved-count">0 saved</strong></div>
+      </section>
+      <div class="recipe-toolbar">
+        <label class="search-box"><span>🔎</span><input id="recipe-search" type="search" placeholder="Search cinnamon, pizza, mocha..."></label>
+        <div class="filter-row" id="recipe-filters"></div>
+      </div>
+      <div class="recipe-grid" id="recipe-grid"></div>
+    </section>
+
+    <!-- PROFILE -->
+    <section class="view" id="view-profile" data-view="profile">
+      <section class="profile-hero">
+        <div id="profile-avatar-display" class="profile-avatar">🍓</div>
+        <div class="profile-copy"><span class="eyebrow">BERRY VIBES PLAYER</span><h1 id="profile-name-display">Berry Chef</h1><p>Cozy Explorer · Level <span id="profile-level">1</span></p></div>
+        <button class="settings-button" type="button" id="reset-progress">Reset progress</button>
+      </section>
+
+      <div class="profile-grid">
+        <article class="profile-stat-card"><span>🔥</span><strong id="profile-streak">1</strong><small>Day streak</small></article>
+        <article class="profile-stat-card"><span>✨</span><strong id="profile-xp">0</strong><small>Berry XP</small></article>
+        <article class="profile-stat-card"><span>✅</span><strong id="profile-cooked">0</strong><small>Cooked recipes</small></article>
+        <article class="profile-stat-card"><span>💗</span><strong id="profile-saved">0</strong><small>Saved recipes</small></article>
+      </div>
+
+      <section class="customizer-section">
+        <div class="section-title-row"><div><span class="eyebrow">🎨 PROFILE STUDIO</span><h2>Make the cookbook look like you</h2></div></div>
+        <div class="customizer-grid">
+          <article class="customizer-card">
+            <h3>1. Display name</h3>
+            <label>Player name<input id="profile-name-input" type="text" maxlength="28" placeholder="Berry Chef"></label>
+            <button id="save-profile-name" class="small-button" type="button">SAVE NAME</button>
+          </article>
+
+          <article class="customizer-card">
+            <h3>2. Avatar or profile photo</h3>
+            <div id="avatar-picker" class="avatar-picker"></div>
+            <div class="photo-controls">
+              <label class="upload-button" for="profile-photo-input">Upload a picture</label>
+              <input id="profile-photo-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+              <button id="remove-profile-photo" class="ghost-button" type="button">Remove picture</button>
+            </div>
+            <p class="helper-text">Your picture is resized before being saved locally in this browser.</p>
+          </article>
+
+          <article class="customizer-card wide-card">
+            <h3>3. Choose a full app color world</h3>
+            <p class="helper-text">Each choice changes the page background, cards, buttons, headings, path glow, and borders.</p>
+            <div id="theme-picker" class="theme-picker"></div>
+          </article>
+
+          <article class="customizer-card wide-card">
+            <h3>4. Choose an accent color</h3>
+            <div id="accent-picker" class="accent-picker"></div>
+            <label class="color-field">Or pick any color <input id="custom-accent" type="color" value="#ed5f89"></label>
+          </article>
+        </div>
+      </section>
+
+      <section class="achievement-section">
+        <div class="section-title-row"><div><span class="eyebrow">ACHIEVEMENTS</span><h2>Your cozy badges</h2></div></div>
+        <div class="badge-grid">
+          <article class="achievement-badge" data-badge="first"><span>🍓</span><strong>First Bite</strong><small>Cook your first recipe</small></article>
+          <article class="achievement-badge" data-badge="five"><span>🥞</span><strong>Recipe Runner</strong><small>Cook 5 recipes</small></article>
+          <article class="achievement-badge" data-badge="save"><span>💗</span><strong>Cozy Collector</strong><small>Save 5 favorites</small></article>
+          <article class="achievement-badge" data-badge="xp"><span>🌟</span><strong>Berry Legend</strong><small>Reach 500 Berry XP</small></article>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Primary navigation">
+    <button class="nav-button active-nav" type="button" data-view-target="home"><span>🏠</span><small>Home</small></button>
+    <button class="nav-button" type="button" data-view-target="path"><span>🗺️</span><small>Path</small></button>
+    <button class="nav-button battle-nav-button" type="button" data-view-target="battle"><span>⚔️</span><small>Battle</small></button>
+    <button class="nav-button" type="button" data-view-target="recipes"><span>📚</span><small>Recipes</small></button>
+    <button class="nav-button" type="button" data-view-target="profile"><span>🎨</span><small>Profile</small></button>
+  </nav>
+
+  <dialog class="recipe-dialog" id="recipe-dialog">
+    <div class="dialog-top"><div><span class="eyebrow" id="dialog-category">RECIPE</span><h2 id="dialog-title">Recipe title</h2></div><button class="dialog-close" type="button" id="dialog-close" aria-label="Close recipe">×</button></div>
+    <div class="dialog-hero"><div id="dialog-emoji">🍓</div><p id="dialog-flavor"></p></div>
+    <div class="dialog-grid">
+      <article><h3>WHAT TO EXPECT</h3><p id="dialog-expect"></p></article>
+      <article><h3>INGREDIENT PREVIEW</h3><ul id="dialog-ingredients"></ul></article>
+      <article><h3>COZY TAGS</h3><div id="dialog-tags" class="trait-row"></div></article>
+      <article><h3>BERRYBELLE'S TIP</h3><p>Save it, battle it, or mark it cooked. The live cookbook remembers your progress on this browser. 🍓</p></article>
+    </div>
+    <p class="preview-note"><strong>Recipe preview:</strong> this interface keeps the full cookbook title/category and gives a design-friendly preview. It does not replace your full written cookbook instructions.</p>
+    <div class="dialog-actions">
+      <button id="dialog-save" class="secondary-button" type="button">♡ SAVE</button>
+      <button id="dialog-cook" class="primary-button" type="button">✓ MARK COOKED +25 XP</button>
+      <button id="dialog-battle" class="battle-button" type="button">⚔ BATTLE</button>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
